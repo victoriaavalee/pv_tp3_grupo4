@@ -12,16 +12,19 @@ export const proyectos = [
 ];
 
 export const obtenerProyectos = () => {
-  return proyectos;
+  return [...proyectos];
 };
 
+export const agregarProyecto = (nuevoProyecto) => {
+  proyectos.push(nuevoProyecto);
+};
 
 export const eliminarProyecto = (id) => {
-  const index = proyectos.findIndex(p => p.id === id);
+  const index = proyectos.findIndex(p => p.id === Number(id));
   if (index !== -1) {
     proyectos.splice(index, 1);
   }
-  return proyectos;
+  return [...proyectos];
 };
 
 export const buscarProyecto = (termino) => {
