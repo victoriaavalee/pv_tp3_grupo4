@@ -1,0 +1,100 @@
+:root {
+    --bg: #e3e6ee;
+    --primary: #929cda;
+    --primary-light: #bac2ff;
+    --primary-dark: #7d87ad;
+    --text-main: #424242;
+    --text-secondary: #5a5a5a;
+    --radius: 10px;
+    --shadow: 0 4px 10px rgba(0,0,0,0.1);
+    --font: 'Montserrat', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font);
+    background-color: var(--bg);
+    color: var(--text-main);
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    min-height: 100vh;
+}
+
+header {
+    background-color: var(--primary);
+    color: white;
+    padding: 1.5rem;
+}
+
+header h1 {
+    margin-bottom: 0.5rem;
+}
+
+nav ul {
+    display: flex;
+    gap: 1rem;
+    list-style: none;
+}
+
+nav a {
+    text-decoration: none;
+    color: white;
+    padding: 0.3rem 0.5rem;
+    border-radius: var(--radius);
+    transition: 0.3s;
+}
+
+nav a:hover {
+    background-color: var(--primary-light);
+}
+
+main {
+    display: grid;
+    gap: 2rem;
+    padding: 2rem;
+}
+
+section {
+    margin-bottom: 2rem;
+}
+
+article, aside, section {
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+
+#listado-proyectos {
+    display: grid;
+    grid-template-columns: repeat(1, 2fr);
+    gap: 1rem;
+}
+
+#listado-proyectos article {
+    transition: 0.2s;
+}
+
+#listado-proyectos article:hover {
+    transform: translateY(-3px);
+}
+
+a {
+    color: var(--primary-dark);
+}
+
+a:hover {
+    opacity: 0.7;
+}
+
+footer {
+    background-color: var(--primary);
+    color: white;
+    text-align: center;
+    padding: 1rem;
+}
