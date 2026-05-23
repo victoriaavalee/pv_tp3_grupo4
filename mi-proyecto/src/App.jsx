@@ -1,9 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import { obtenerProyectos, eliminarProyecto, buscarProyecto } from './services/proyectoService';
+import './App.css';
+import Header from './components/Header';
+import Nav from './components/Nav';
+import Footer from './components/Footer';
+import ListaProyectos from './components/ListaProyectos';
 
 function App() {
   const [proyectos, setProyectos] = useState([]);
   const [busqueda, setBusqueda] = useState('');
+
+  return (
+    <>
+      <header>
+        <Header />
+        <Nav />
+      </header>
+      <main>
+        <ListaProyectos />
+      </main>
+      <Footer />
+    </>
+  );
 
   useEffect(() => {
     setProyectos(obtenerProyectos());
