@@ -3,8 +3,13 @@
     --primary: #929cda;
     --primary-light: #bac2ff;
     --primary-dark: #7d87ad;
+
+    --danger: #e74654;
+    --danger-hover: #ca4956;
+
     --text-main: #424242;
     --text-secondary: #5a5a5a;
+
     --radius: 10px;
     --shadow: 0 4px 10px rgba(0,0,0,0.1);
     --font: 'Montserrat', sans-serif;
