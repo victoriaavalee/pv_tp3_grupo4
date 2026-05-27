@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { obtenerProyectos, eliminarProyecto, buscarProyecto } from '../services/proyectoService.js';
-import './ListaProyectos.css';
+import { obtenerProyectos, agregarProyecto, eliminarProyecto, buscarProyecto } from '../services/proyectoService.js';
+import '../css/ListaProyectos.css';
 
 function ListaProyectos() {
   const [proyectos, setProyectos] = useState([]);
