@@ -9,4 +9,4 @@
 # Glenda Sofia Verdeja            sofiver2023 
 ===================================================
 ## Gestión de Proyectos Educativos
-Este proyecto consiste en una aplicación web desarrollada con React y Vite, orientada a la gestión de información mediante una interfaz dinámica e interactiva. El sistema permite visualizar, agregar, editar y eliminar elementos de una lista, utilizando componentes reutilizables y navegación entre vistas
+Este proyecto consiste en una aplicación web desarrollada con React y Vite. El sistema permite gestionar proyectos educativos, utilizando componentes reutilizables y navegación entre vistas.

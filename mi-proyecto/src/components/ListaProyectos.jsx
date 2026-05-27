@@ -10,6 +10,12 @@ function ListaProyectos() {
     setProyectos(obtenerProyectos());
   }, []);
 
+  const [nuevoProyecto, setNuevoProyecto] = useState({
+    titulo: '',
+    categoria: '',
+    estado: 'Activo'
+});
+
   const handleEliminar = (id) => {
     eliminarProyecto(id);
     const proyectosActualizados = buscarProyecto(busqueda);
@@ -22,6 +28,35 @@ function ListaProyectos() {
     const proyectosFiltrados = buscarProyecto(valor);
     setProyectos(proyectosFiltrados);
   };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setNuevoProyecto({
+        ...nuevoProyecto,
+        [name]: value
+    });
+};
+
+const handleAgregar = () => {
+    if (
+        nuevoProyecto.titulo.trim() === '' ||
+        nuevoProyecto.categoria.trim() === ''
+    ) {
+        alert('Complete todos los campos');
+        return;
+    }
+    const proyecto = {
+        id: Date.now(),
+        ...nuevoProyecto
+    };
+    agregarProyecto(proyecto);
+    setProyectos(obtenerProyectos());
+    setNuevoProyecto({
+        titulo: '',
+        categoria: '',
+        estado: 'Activo'
+    });
+};
 
   return (
 <section className="lista-proyectos-container">
@@ -38,7 +73,7 @@ function ListaProyectos() {
           className="buscador"
         />
       </div>
-      <div className="grid-proyectos">
+      <div className="contenedor-proyectos">
         {proyectos.map((proyecto) => (
           <article
             key={proyecto.id}
@@ -64,6 +99,37 @@ function ListaProyectos() {
             </button>
           </article>
         ))}
+        <article className="card-proyecto card-agregar">
+        <h3>Nuevo Proyecto</h3>
+        <input
+            type="text"
+            name="titulo"
+            placeholder="Título"
+            value={nuevoProyecto.titulo}
+            onChange={handleChange}
+        />
+        <input
+            type="text"
+            name="categoria"
+            placeholder="Categoría"
+            value={nuevoProyecto.categoria}
+            onChange={handleChange}
+        />
+        <select
+            name="estado"
+            value={nuevoProyecto.estado}
+            onChange={handleChange}
+        >
+            <option value="Activo">Activo</option>
+            <option value="Pendiente">Pendiente</option>
+            <option value="En proceso">En proceso</option>
+            <option value="Completo">Completo</option>
+            <option value="En pausa">En pausa</option>
+        </select>
+        <button className="btn-agregar" onClick={handleAgregar}>
+          Agregar proyecto
+        </button>
+      </article>
       </div>
     </section>
   );

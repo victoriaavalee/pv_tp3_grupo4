@@ -32,26 +32,26 @@
     box-shadow: 0 0 8px rgba(146, 156, 218, 0.3);
 }
 
-.grid-proyectos {
+.contenedor-proyectos {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     gap: 1.5rem;
 }
 
 .card-proyecto {
-    background-color: white;
+    background: white;
     border-radius: var(--radius);
-    padding: 1.5rem;
+    padding: 1.2rem;
     box-shadow: var(--shadow);
-    transition: 0.2s ease;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     min-height: 220px;
+    transition: 0.2s ease;
 }
 
 .card-proyecto:hover {
-    transform: translateY(-5px);
+    transform: translateY(-4px);
 }
 
 .card-proyecto h3 {
@@ -84,5 +84,40 @@
 
 .btn-eliminar:hover {
     background-color: var(--danger-hover);
+    transform: translateY(-2px);
+}
+
+.card-agregar {
+    gap: 0.8rem;
+}
+
+.card-agregar input,
+.card-agregar select {
+    padding: 0.7rem;
+    border: 1px solid #d7d9e5;
+    border-radius: var(--radius);
+    outline: none;
+    font-family: var(--font);
+}
+
+.card-agregar input:focus,
+.card-agregar select:focus {
+    border-color: var(--primary);
+}
+
+.btn-agregar {
+    margin-top: auto;
+    border: none;
+    padding: 0.8rem;
+    border-radius: var(--radius);
+    background-color: var(--primary);
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.btn-agregar:hover {
+    background-color: var(--primary-dark);
     transform: translateY(-2px);
 }
