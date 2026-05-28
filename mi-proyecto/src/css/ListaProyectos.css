@@ -121,3 +121,21 @@
     background-color: var(--primary-dark);
     transform: translateY(-2px);
 }
+.btn-detalle {
+  background-color: #333;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.btn-detalle:hover {
+  background-color: #555;
+}
+
+.botones-card {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
