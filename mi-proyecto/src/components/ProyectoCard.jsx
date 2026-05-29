@@ -1,4 +1,4 @@
-function ProyectoCard({ proyecto, onEliminar }) {
+function ProyectoCard({ proyecto, onEliminar, onVerDetalle }) {
   const { id, titulo, categoria, estado } = proyecto;
 
   return (
@@ -12,7 +12,7 @@ function ProyectoCard({ proyecto, onEliminar }) {
         <button className="btn-eliminar" onClick={() => onEliminar(id)}>
           Eliminar
         </button>
-        <button className="btn-detalle" onClick={() => alert('Próximamente')}>
+        <button className="btn-detalle" onClick={() => onVerDetalle(proyecto)}>
           Ver detalle
         </button>
       </div>

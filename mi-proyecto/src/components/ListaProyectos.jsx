@@ -1,15 +1,21 @@
 import { useState, useEffect } from 'react';
 import { obtenerProyectos, agregarProyecto, eliminarProyecto, buscarProyecto } from '../services/proyectoService.js';
 import ProyectoCard from './ProyectoCard';
+import DetalleProyecto from './DetalleProyecto';
 import '../css/ListaProyectos.css';
 
 function ListaProyectos() {
   const [proyectos, setProyectos] = useState([]);
   const [busqueda, setBusqueda] = useState('');
+  const [proyectoSeleccionado, setProyectoSeleccionado] = useState(null);
   const [nuevoProyecto, setNuevoProyecto] = useState({
     titulo: '',
     categoria: '',
-    estado: 'Activo'
+    estado: 'Activo',
+    descripcion1: '',
+    descripcion2: '',
+    recursos: [],
+    equipo: []
   });
 
   useEffect(() => {
@@ -40,8 +46,12 @@ function ListaProyectos() {
     }
     agregarProyecto({ id: Date.now(), ...nuevoProyecto });
     setProyectos(obtenerProyectos());
-    setNuevoProyecto({ titulo: '', categoria: '', estado: 'Activo' });
+    setNuevoProyecto({ titulo: '', categoria: '', estado: 'Activo', descripcion1: '', descripcion2: '', recursos: [], equipo: [] });
   };
+
+  if (proyectoSeleccionado) {
+    return <DetalleProyecto proyecto={proyectoSeleccionado} onVolver={() => setProyectoSeleccionado(null)} />;
+  }
 
   return (
     <section className="lista-proyectos-container">
@@ -63,6 +73,7 @@ function ListaProyectos() {
             key={proyecto.id}
             proyecto={proyecto}
             onEliminar={handleEliminar}
+            onVerDetalle={setProyectoSeleccionado}
           />
         ))}
 
@@ -70,6 +81,8 @@ function ListaProyectos() {
           <h3>Nuevo Proyecto</h3>
           <input type="text" name="titulo" placeholder="Título" value={nuevoProyecto.titulo} onChange={handleChange} />
           <input type="text" name="categoria" placeholder="Categoría" value={nuevoProyecto.categoria} onChange={handleChange} />
+          <input type="text" name="descripcion1" placeholder="Descripción 1" value={nuevoProyecto.descripcion1} onChange={handleChange} />
+          <input type="text" name="descripcion2" placeholder="Descripción 2" value={nuevoProyecto.descripcion2} onChange={handleChange} />
           <select name="estado" value={nuevoProyecto.estado} onChange={handleChange}>
             <option value="Activo">Activo</option>
             <option value="Pendiente">Pendiente</option>
