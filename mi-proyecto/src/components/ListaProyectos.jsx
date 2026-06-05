@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { obtenerProyectos, agregarProyecto, eliminarProyecto, buscarProyecto } from '../services/proyectoService.js';
 import ProyectoCard from './ProyectoCard';
 import DetalleProyecto from './DetalleProyecto';
@@ -10,12 +10,21 @@ function ListaProyectos() {
   const [busqueda, setBusqueda] = useState('');
   const [proyectoSeleccionado, setProyectoSeleccionado] = useState(null);
   const [ultimaActualizacion, setUltimaActualizacion] = useState(null);
-  useEffect(() => {
-  if (proyectos.length > 0) {
-    setUltimaActualizacion(new Date().toLocaleString());
-  }
-}, [proyectos]);
 
+  const primeraVez = useRef(true);
+  const cambioDesBusqueda = useRef(false);
+
+  useEffect(() => {
+    if (primeraVez.current) {
+      primeraVez.current = false;
+      return;
+    }
+    if (cambioDesBusqueda.current) {
+      cambioDesBusqueda.current = false;
+      return;
+    }
+    setUltimaActualizacion(new Date());
+  }, [proyectos]);
 
   const [nuevoProyecto, setNuevoProyecto] = useState({
     titulo: '',
@@ -39,6 +48,7 @@ function ListaProyectos() {
   const handleBuscar = (e) => {
     const { value } = e.target;
     setBusqueda(value);
+    cambioDesBusqueda.current = true;
     setProyectos(buscarProyecto(value));
   };
 
@@ -65,7 +75,6 @@ function ListaProyectos() {
   return (
     <section className="lista-proyectos-container">
       <h1 className="titulo-proyectos">Listado de Proyectos</h1>
-
       <div className="buscador-container">
         <input
           type="text"
@@ -75,7 +84,6 @@ function ListaProyectos() {
           className="buscador"
         />
       </div>
-
       <div className="contenedor-proyectos">
         {proyectos.map((proyecto) => (
           <ProyectoCard
@@ -85,7 +93,6 @@ function ListaProyectos() {
             onVerDetalle={setProyectoSeleccionado}
           />
         ))}
-
         <article className="card-proyecto card-agregar">
           <h3>Nuevo Proyecto</h3>
           <input type="text" name="titulo" placeholder="Título" value={nuevoProyecto.titulo} onChange={handleChange} />
@@ -102,9 +109,7 @@ function ListaProyectos() {
           <button className="btn-agregar" onClick={handleAgregar}>Agregar proyecto</button>
         </article>
       </div>
-      <RegistroActividad
-        fecha={ultimaActualizacion}
-    />
+      <RegistroActividad fecha={ultimaActualizacion} />
     </section>
   );
 }
