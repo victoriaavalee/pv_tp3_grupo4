@@ -2,12 +2,16 @@ import { useState, useEffect } from 'react';
 import { obtenerProyectos, agregarProyecto, eliminarProyecto, buscarProyecto } from '../services/proyectoService.js';
 import ProyectoCard from './ProyectoCard';
 import DetalleProyecto from './DetalleProyecto';
+import RegistroActividad from './RegistroActividad';
 import '../css/ListaProyectos.css';
 
 function ListaProyectos() {
   const [proyectos, setProyectos] = useState([]);
   const [busqueda, setBusqueda] = useState('');
   const [proyectoSeleccionado, setProyectoSeleccionado] = useState(null);
+  const [ultimaActualizacion, setUltimaActualizacion] = useState(
+    new Date().toLocaleString()
+  );
   const [nuevoProyecto, setNuevoProyecto] = useState({
     titulo: '',
     categoria: '',
@@ -25,6 +29,7 @@ function ListaProyectos() {
   const handleEliminar = (id) => {
     eliminarProyecto(id);
     setProyectos(buscarProyecto(busqueda));
+    setUltimaActualizacion(new Date().toLocaleString());
   };
 
   const handleBuscar = (e) => {
@@ -46,6 +51,7 @@ function ListaProyectos() {
     }
     agregarProyecto({ id: Date.now(), ...nuevoProyecto });
     setProyectos(obtenerProyectos());
+    setUltimaActualizacion(new Date().toLocaleString());
     setNuevoProyecto({ titulo: '', categoria: '', estado: 'Activo', descripcion1: '', descripcion2: '', recursos: [], equipo: [] });
   };
 
@@ -93,6 +99,9 @@ function ListaProyectos() {
           <button className="btn-agregar" onClick={handleAgregar}>Agregar proyecto</button>
         </article>
       </div>
+      <RegistroActividad
+        fecha={ultimaActualizacion}
+    />
     </section>
   );
 }

@@ -1,0 +1,14 @@
+.registro-actividad {
+    margin-top: 2rem;
+    padding: 1rem 1.5rem;
+    background-color: white;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    border-left: 5px solid var(--primary);
+}
+
+.registro-actividad p {
+    margin: 0;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+}
