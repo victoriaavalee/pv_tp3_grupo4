@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { obtenerProyectos, agregarProyecto, eliminarProyecto, buscarProyecto } from '../services/proyectoService.js';
 import ProyectoCard from './ProyectoCard';
 import DetalleProyecto from './DetalleProyecto';
@@ -10,12 +10,28 @@ function ListaProyectos() {
   const [busqueda, setBusqueda] = useState('');
   const [proyectoSeleccionado, setProyectoSeleccionado] = useState(null);
   const [ultimaActualizacion, setUltimaActualizacion] = useState(null);
-  useEffect(() => {
-  if (proyectos.length > 0) {
-    setUltimaActualizacion(new Date().toLocaleString());
-  }
-}, [proyectos]);
+  const esPrimerRender = useRef(true);
+  const fueModificado = useRef(false);
 
+  useEffect(() => {
+    setProyectos(obtenerProyectos());
+  }, []);
+
+  useEffect(() => {
+    if (esPrimerRender.current) {
+      esPrimerRender.current = false;
+      return;
+    }
+    if (!fueModificado.current) return;
+    const ahora = new Date();
+    const dia = String(ahora.getDate()).padStart(2, '0');
+    const mes = String(ahora.getMonth() + 1).padStart(2, '0');
+    const anio = ahora.getFullYear();
+    const horas = String(ahora.getHours()).padStart(2, '0');
+    const minutos = String(ahora.getMinutes()).padStart(2, '0');
+    setUltimaActualizacion(`${dia}/${mes}/${anio} a las ${horas}:${minutos} hs.`);
+    fueModificado.current = false;
+  }, [proyectos]);
 
   const [nuevoProyecto, setNuevoProyecto] = useState({
     titulo: '',
@@ -27,13 +43,10 @@ function ListaProyectos() {
     equipo: []
   });
 
-  useEffect(() => {
-    setProyectos(obtenerProyectos());
-  }, []);
-
   const handleEliminar = (id) => {
+    fueModificado.current = true;
     eliminarProyecto(id);
-    setProyectos(buscarProyecto(busqueda));
+    setProyectos(obtenerProyectos());
   };
 
   const handleBuscar = (e) => {
@@ -53,6 +66,7 @@ function ListaProyectos() {
       alert('Complete todos los campos');
       return;
     }
+    fueModificado.current = true;
     agregarProyecto({ id: Date.now(), ...nuevoProyecto });
     setProyectos(obtenerProyectos());
     setNuevoProyecto({ titulo: '', categoria: '', estado: 'Activo', descripcion1: '', descripcion2: '', recursos: [], equipo: [] });
@@ -102,9 +116,8 @@ function ListaProyectos() {
           <button className="btn-agregar" onClick={handleAgregar}>Agregar proyecto</button>
         </article>
       </div>
-      <RegistroActividad
-        fecha={ultimaActualizacion}
-    />
+
+      <RegistroActividad fecha={ultimaActualizacion} />
     </section>
   );
 }
