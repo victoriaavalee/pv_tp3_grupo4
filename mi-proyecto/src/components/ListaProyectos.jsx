@@ -9,9 +9,14 @@ function ListaProyectos() {
   const [proyectos, setProyectos] = useState([]);
   const [busqueda, setBusqueda] = useState('');
   const [proyectoSeleccionado, setProyectoSeleccionado] = useState(null);
-  const [ultimaActualizacion, setUltimaActualizacion] = useState(
-    new Date().toLocaleString()
-  );
+  const [ultimaActualizacion, setUltimaActualizacion] = useState(null);
+  useEffect(() => {
+  if (proyectos.length > 0) {
+    setUltimaActualizacion(new Date().toLocaleString());
+  }
+}, [proyectos]);
+
+
   const [nuevoProyecto, setNuevoProyecto] = useState({
     titulo: '',
     categoria: '',
@@ -29,7 +34,6 @@ function ListaProyectos() {
   const handleEliminar = (id) => {
     eliminarProyecto(id);
     setProyectos(buscarProyecto(busqueda));
-    setUltimaActualizacion(new Date().toLocaleString());
   };
 
   const handleBuscar = (e) => {
@@ -51,7 +55,6 @@ function ListaProyectos() {
     }
     agregarProyecto({ id: Date.now(), ...nuevoProyecto });
     setProyectos(obtenerProyectos());
-    setUltimaActualizacion(new Date().toLocaleString());
     setNuevoProyecto({ titulo: '', categoria: '', estado: 'Activo', descripcion1: '', descripcion2: '', recursos: [], equipo: [] });
   };
 
