@@ -1,0 +1,96 @@
+[33mcommit 475380b87ee3265b314a4ccce8371abda412c98c[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: paola-zoe <paolazoetoconas@gmail.com>
+Date:   Fri May 22 23:32:47 2026 -0300
+
+    Arreglos
+
+[33mcommit 828e72c9f6ab0e20f4bbcac3ef2e74e2a4f2bdc7[m
+Author: paola-zoe <paolazoetoconas@gmail.com>
+Date:   Fri May 22 23:31:28 2026 -0300
+
+    Arreglos
+
+[33mcommit d0bc00d10ca4ecaedb2fff9610b7a60760952cc8[m
+Author: paola-zoe <paolazoetoconas@gmail.com>
+Date:   Fri May 22 22:07:14 2026 -0300
+
+    Arreglos
+
+[33mcommit 01931127e1039e81229ead48d805fe58fcdcf735[m
+Author: victoria valencia <116645345+victoriaavalee@users.noreply.github.com>
+Date:   Fri May 22 21:23:47 2026 -0300
+
+    Delete index.html
+
+[33mcommit 0a616bd8d4fda7b63d50d57797b60437b714f85a[m
+Author: victoria valencia <116645345+victoriaavalee@users.noreply.github.com>
+Date:   Fri May 22 21:23:08 2026 -0300
+
+    Delete vite.config.js
+
+[33mcommit d3616be74aa5438576aee9096a00704283026f63[m
+Author: victoria valencia <116645345+victoriaavalee@users.noreply.github.com>
+Date:   Fri May 22 21:21:10 2026 -0300
+
+    Delete eslint.config.js
+
+[33mcommit 62312d8cc0d84f14dc1a889d5512e2f0e83f1490[m
+Author: victoria valencia <116645345+victoriaavalee@users.noreply.github.com>
+Date:   Fri May 22 21:20:36 2026 -0300
+
+    Delete mi-proyecto/.gitignore
+
+[33mcommit dd07a116d0b09f107ca6b264567fa1d0569d4245[m
+Author: victoria valencia <116645345+victoriaavalee@users.noreply.github.com>
+Date:   Fri May 22 21:20:05 2026 -0300
+
+    Delete mi-proyecto/README.md
+
+[33mcommit f405df8b38a68e0bf737a67427a9731639c52fce[m
+Author: victoria valencia <116645345+victoriaavalee@users.noreply.github.com>
+Date:   Fri May 22 21:18:36 2026 -0300
+
+    Delete public directory
+
+[33mcommit c3a7da0a4615a2d8e9235e219a7607ebad9f166a[m
+Merge: 18be3ee 500fda9
+Author: victoriaavalee <victoriavale754@gmail.com>
+Date:   Fri May 22 19:14:04 2026 -0300
+
+    Merge branch 'feature-layout-componentes'
+
+[33mcommit 18be3eea2500c0139cfbe1e935db6889168f9cd4[m
+Author: paola-zoe <paolazoetoconas@gmail.com>
+Date:   Fri May 22 17:06:19 2026 -0300
+
+    Funciones Flechas
+
+[33mcommit 500fda9958c062be4757ede5a3856c822097be26[m[33m ([m[1;31morigin/feature-layout-componentes[m[33m)[m
+Author: juanmks86-debug <juanmks86@gmail.com>
+Date:   Fri May 22 14:38:29 2026 -0300
+
+    feat: componentes de layout Header, Nav, Footer y ListaProyectos
+
+[33mcommit 75a75e75d850d60ae38ea54398080cc307cb4da9[m
+Author: sofiver2023 <verdejasofia4@gmail.com>
+Date:   Thu May 21 17:16:33 2026 -0300
+
+    TP3 punto 5
+
+[33mcommit 6598f1b081b3127a01072b5f35877cd1939e5be6[m
+Author: Jonatan Garcia <sacha.255555@gmail.com>
+Date:   Thu May 21 16:03:07 2026 -0300
+
+    Creacion del proyecto mi-proyecto. Creacion del modulo de Servicio proyectoService.js con 10 proyectos con sus datos id, titulo, categoria y estado
+
+[33mcommit f4fff4f587aceb4c3d9f0f86a61f94393273a838[m
+Author: victoria valencia <116645345+victoriaavalee@users.noreply.github.com>
+Date:   Wed May 20 11:17:46 2026 -0300
+
+    Update README with team members and GitHub usernames
+
+[33mcommit 7fe8b1e48f62ae46280207552b79498595f6cee7[m
+Author: victoria valencia <116645345+victoriaavalee@users.noreply.github.com>
+Date:   Wed May 20 11:01:44 2026 -0300
+
+    Initial commit

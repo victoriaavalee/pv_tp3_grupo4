@@ -4,17 +4,14 @@ import ProyectoCard from './ProyectoCard';
 import DetalleProyecto from './DetalleProyecto';
 import RegistroActividad from './RegistroActividad';
 import '../css/ListaProyectos.css';
+import FormularioProyecto from './FormularioProyecto.jsx'
 
 function ListaProyectos() {
   const [proyectos, setProyectos] = useState([]);
   const [busqueda, setBusqueda] = useState('');
   const [proyectoSeleccionado, setProyectoSeleccionado] = useState(null);
   const [ultimaActualizacion, setUltimaActualizacion] = useState(null);
-//useEffect(() => {
-  //if (proyectos.length > 0) {
-  //  setUltimaActualizacion(new Date().toLocaleString());
-  //}
-//}, [proyectos]);
+
 
 const primeraVez = useRef(true);
 const cambioDesBusqueda = useRef(false);
@@ -32,15 +29,6 @@ useEffect(() => {
 }, [proyectos]);
 
 
-const [nuevoProyecto, setNuevoProyecto] = useState({
-  titulo: '',
-  categoria: '',
-  estado: 'Activo',
-  descripcion1: '',
-  descripcion2: '',
-  recursos: [],
-  equipo: []
-});
 
 useEffect(() => {
   setProyectos(obtenerProyectos());
@@ -58,21 +46,11 @@ const handleBuscar = (e) => {
   setProyectos(buscarProyecto(value));
 };
 
-const handleChange = (e) => {
-  const { name, value } = e.target;
-  setNuevoProyecto({ ...nuevoProyecto, [name]: value });
+const handleAgregarAlServicio = (proyectoCompleto) => {
+  agregarProyecto(proyectoCompleto); 
+  setProyectos(obtenerProyectos()); 
 };
 
-const handleAgregar = () => {
-  const { titulo, categoria } = nuevoProyecto;
-  if (titulo.trim() === '' || categoria.trim() === '') {
-    alert('Complete todos los campos');
-    return;
-  }
-  agregarProyecto({ id: Date.now(), ...nuevoProyecto });
-  setProyectos(obtenerProyectos());
-  setNuevoProyecto({ titulo: '', categoria: '', estado: 'Activo', descripcion1: '', descripcion2: '', recursos: [], equipo: [] });
-};
 
 if (proyectoSeleccionado) {
   return <DetalleProyecto proyecto={proyectoSeleccionado} onVolver={() => setProyectoSeleccionado(null)} />;
@@ -80,6 +58,9 @@ if (proyectoSeleccionado) {
 
 return (
   <section className="lista-proyectos-container">
+    <div className="nuevo-proyecto-container">
+      <FormularioProyecto onAgregar={handleAgregarAlServicio} />
+      </div>
     <h1 className="titulo-proyectos">Listado de Proyectos</h1>
     <div className="buscador-container">
       <input
@@ -100,26 +81,10 @@ return (
           onVerDetalle={setProyectoSeleccionado}
         />
       ))}
-
-      <article className="card-proyecto card-agregar">
-        <h3>Nuevo Proyecto</h3>
-        <input type="text" name="titulo" placeholder="Título" value={nuevoProyecto.titulo} onChange={handleChange} />
-        <input type="text" name="categoria" placeholder="Categoría" value={nuevoProyecto.categoria} onChange={handleChange} />
-        <input type="text" name="descripcion1" placeholder="Descripción 1" value={nuevoProyecto.descripcion1} onChange={handleChange} />
-        <input type="text" name="descripcion2" placeholder="Descripción 2" value={nuevoProyecto.descripcion2} onChange={handleChange} />
-        <select name="estado" value={nuevoProyecto.estado} onChange={handleChange}>
-          <option value="Activo">Activo</option>
-          <option value="Pendiente">Pendiente</option>
-          <option value="En proceso">En proceso</option>
-          <option value="Completo">Completo</option>
-          <option value="En pausa">En pausa</option>
-        </select>
-        <button className="btn-agregar" onClick={handleAgregar}>Agregar proyecto</button>
-      </article>
     </div>
-    <RegistroActividad fecha={ultimaActualizacion} />
-    </section>
-  );
+    {ultimaActualizacion && <RegistroActividad fecha={ultimaActualizacion} />}
+  </section>
+);
 }
 
 export default ListaProyectos;

@@ -10,9 +10,17 @@
 }
 
 .buscador-container {
+    
     display: flex;
     justify-content: center;
     margin-bottom: 2rem;
+}
+.nuevo-proyecto-container {
+    
+    display: grid;
+    justify-content: center;
+    margin-bottom: 2rem;
+    grid-template-columns: 400px;
 }
 
 .buscador {
