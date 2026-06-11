@@ -1,5 +1,6 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import { obtenerProyectos } from '../services/proyectoService';
+import { Container, Typography, TextField, Button, Select, MenuItem, FormControl, InputLabel, Alert, List, ListItem  } from '@mui/material';
 import '../css/DetalleProyecto.css';
 
 function DetalleProyecto() {
@@ -15,37 +16,39 @@ function DetalleProyecto() {
   const { titulo, categoria, estado, descripcion1, descripcion2, recursos, equipo } = proyecto;
 
   return (
-    <div className="detalle-container">
-      <button className="btn-volver" onClick={() => navigate('/proyectos')}>← Volver</button>
-      <h2>{titulo}</h2>
+    <Container className="detalle-container">
+      <Button className="btn-volver" onClick={() => navigate('/proyectos')}>← Volver</Button>
+      <Typography variant="h5">{titulo}</Typography>
       <div>
         <p><strong>Categoría:</strong> {categoria}</p>
         <p><strong>Estado:</strong> {estado}</p>
       </div>
-      
-      <h3>Descripción</h3>
+
+      <Typography variant="h6">Descripción</Typography>
       <p>{descripcion1}</p>
       <p>{descripcion2}</p>
-      <h3>Recursos</h3>
+      <Typography variant="h6">Recursos</Typography>
 
       {recursos.length > 0 ? (
-        <ul>
+        <List>
           {recursos.map((r, i) => (
-            <li key={i}>
+            <ListItem  key={i}>
               <a href={r.url} target="_blank" rel="noreferrer">{r.tipo}</a>
-            </li>
+            </ListItem>
           ))}
-        </ul>
+        </List>
         ) : (
         <p>No hay recursos registrados.</p>)}
 
-        <h3>Equipo</h3>
-        <ul>
+        <Typography variant="h6">Equipo</Typography>
+        <List>
           {equipo.map((m, i) => (
-            <li key={i}><strong>{m.nombre}</strong> — {m.rol}</li>
+            <ListItem key={i}>
+              <strong>{m.nombre}</strong> — {m.rol}
+            </ListItem>
           ))}
-        </ul>
-    </div>
+        </List>
+    </Container>
   );
 }
 
