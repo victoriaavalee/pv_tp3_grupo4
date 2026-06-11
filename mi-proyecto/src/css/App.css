@@ -4,6 +4,9 @@
     --primary-light: #bac2ff;
     --primary-dark: #7d87ad;
 
+    --info:#333;
+    --info-hover:#3d3d3d;
+
     --danger: #e74654;
     --danger-hover: #ca4956;
 
@@ -46,6 +49,24 @@ nav ul {
     list-style: none;
 }
 
+.nav-link {
+    text-decoration: none;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius);
+    transition: 0.3s ease;
+}
+
+.nav-link:hover {
+    background-color: rgba(255,255,255,0.2);
+}
+
+.nav-link.active {
+    background-color: white;
+    color: var(--primary-dark);
+    font-weight: 600;
+}
+
 nav a {
     text-decoration: none;
     color: white;
@@ -59,9 +80,11 @@ nav a:hover {
 }
 
 main {
-    display: grid;
-    gap: 2rem;
-    padding: 2rem;
+    flex: 1;
+    padding: 2rem 3rem;
+    max-width: 1400px;
+    width: 100%;
+    margin: 0 auto;
 }
 
 section {

@@ -58,9 +58,6 @@ if (proyectoSeleccionado) {
 
 return (
   <section className="lista-proyectos-container">
-    <div className="nuevo-proyecto-container">
-      <FormularioProyecto onAgregar={handleAgregarAlServicio} />
-      </div>
     <h1 className="titulo-proyectos">Listado de Proyectos</h1>
     <div className="buscador-container">
       <input
@@ -81,6 +78,7 @@ return (
           onVerDetalle={setProyectoSeleccionado}
         />
       ))}
+      <FormularioProyecto onAgregar={handleAgregarAlServicio}/>
     </div>
     {ultimaActualizacion && <RegistroActividad fecha={ultimaActualizacion} />}
   </section>

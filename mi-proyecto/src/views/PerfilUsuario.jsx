@@ -1,15 +1,21 @@
+import '../css/PerfilUsuario.css';
+
 function PerfilUsuario() {
   return (
-    <div className="perfil-container">
-      <h1>Perfil de usuario</h1>
-      <div className="perfil-card">
-        <p><strong>Nombre:</strong> Usuario Ejemplo</p>
-        <p><strong>Rol:</strong> Alumno</p>
-        <p><strong>Institución:</strong> Facultad de Ingeniería - UNJu</p>
-        <p><strong>Carrera:</strong> Analista Programador Universitario</p>
-      </div>
-    </div>
-  );
+    <section className="perfil-container">
+      <h1 className="perfil-titulo">
+        Perfil de usuario
+      </h1>
+      <article className="perfil-card">
+        <div className="perfil-info">
+          <p><strong>Nombre:</strong> Usuario Ejemplo</p>
+          <p><strong>Rol:</strong> Alumno</p>
+          <p><strong>Institución:</strong> Facultad de Ingeniería - UNJu</p>
+          <p><strong>Carrera:</strong> Analista Programador Universitario</p>
+        </div>
+      </article>
+    </section>
+  )
 }
 
 export default PerfilUsuario;
