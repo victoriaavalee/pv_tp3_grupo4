@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { Container, Typography, TextField, Button, Select, MenuItem, FormControl, InputLabel, Alert } from '@mui/material';
+import { Card, CardContent, Typography, TextField, Select, MenuItem, Button, Alert, Stack, FormControl, InputLabel } from '@mui/material';
+import { AddCircle as AddCircleIcon } from '@mui/icons-material';
 
 function FormularioProyecto({ onAgregar }) {
   const [nuevoProyecto, setNuevoProyecto] = useState({
@@ -22,7 +23,7 @@ function FormularioProyecto({ onAgregar }) {
   const handleAgregar = () => {
     const { titulo, categoria } = nuevoProyecto;
     if (titulo.trim() === '' || categoria.trim() === '') {
-      setError('Complete todos los campos');     //<Alert severity="error">Complete todos los campos.</Alert>
+      setError('Complete todos los campos');     
       return;
     }
     onAgregar({ id: Date.now(), ...nuevoProyecto });
@@ -31,23 +32,90 @@ function FormularioProyecto({ onAgregar }) {
   };
 
   return (
-    <Container className="card-proyecto card-agregar">
-      <Typography>Nuevo Proyecto</Typography>
-      {error && <Alert severity="error">{error}</Alert>}
-      <TextField type="text" name="titulo" placeholder="Título" value={nuevoProyecto.titulo} onChange={handleChange} />
-      <TextField type="text" name="categoria" placeholder="Categoría" value={nuevoProyecto.categoria} onChange={handleChange} />
-      <TextField type="text" name="descripcion1" placeholder="Descripción 1" value={nuevoProyecto.descripcion1} onChange={handleChange} />
-      <TextField type="text" name="descripcion2" placeholder="Descripción 2" value={nuevoProyecto.descripcion2} onChange={handleChange} />
-      <Select name="estado" value={nuevoProyecto.estado} onChange={handleChange}>
-        <MenuItem value="Activo">Activo</MenuItem>
-        <MenuItem value="Pendiente">Pendiente</MenuItem>
-        <MenuItem value="En proceso">En proceso</MenuItem>
-        <MenuItem value="Completo">Completo</MenuItem>
-        <MenuItem value="En pausa">En pausa</MenuItem>
-      </Select>
-      <Button className="btn-agregar" onClick={handleAgregar}>Agregar proyecto</Button>
-    </Container>
-  );
+  <Card sx={{ borderRadius: 3, boxShadow: '0 4px 12px rgba(0,0,0,0.05)', p: 2 }}>
+    <CardContent>
+      <Typography variant="h5" sx={{ mb: 3, fontWeight: 'bold', textAlign: 'center' }}>
+        Nuevo Proyecto
+      </Typography>
+
+      {error && (
+        <Alert severity="error" sx={{ mb: 3, borderRadius: 2 }}>
+          {error}
+        </Alert>
+      )}
+
+      <Stack spacing={2.5}>
+        <TextField
+          fullWidth
+          label="Título"
+          name="titulo"
+          value={nuevoProyecto.titulo}
+          onChange={handleChange}
+          variant="outlined"/>
+          
+        <TextField
+          fullWidth
+          label="Categoría"
+          name="categoria"
+          value={nuevoProyecto.categoria}
+          onChange={handleChange}
+          variant="outlined"/>
+        <TextField
+          fullWidth
+          multiline
+          rows={2}
+          label="Descripción 1"
+          name="descripcion1"
+          value={nuevoProyecto.descripcion1}
+          onChange={handleChange}
+          variant="outlined"/>
+
+        <TextField
+          fullWidth
+          multiline
+          rows={2}
+          label="Descripción 2"
+          name="descripcion2"
+          value={nuevoProyecto.descripcion2}
+          onChange={handleChange}
+          variant="outlined"/>
+
+        <FormControl fullWidth>
+          <InputLabel id="estado-label">Estado</InputLabel>
+          <Select
+            labelId="estado-label"
+            label="Estado"
+            name="estado"
+            value={nuevoProyecto.estado}
+            onChange={handleChange}>
+
+            <MenuItem value="Activo">Activo</MenuItem>
+            <MenuItem value="Pendiente">Pendiente</MenuItem>
+            <MenuItem value="En proceso">En proceso</MenuItem>
+            <MenuItem value="Completo">Completo</MenuItem>
+            <MenuItem value="En pausa">En pausa</MenuItem>
+          </Select>
+        </FormControl>
+
+        <Button
+          variant="contained"
+          size="large"
+          startIcon={<AddCircleIcon />}
+          onClick={handleAgregar}
+          sx={{ 
+            py: 1.5, 
+            textTransform: 'none', 
+            fontWeight: 'bold', 
+            borderRadius: 2,
+            boxShadow: 'none',
+            '&:hover': { boxShadow: '0 4px 12px rgba(25, 118, 210, 0.2)' }
+          }}>
+          Agregar proyecto
+        </Button>
+      </Stack>
+    </CardContent>
+  </Card>
+);
 }
 
 export default FormularioProyecto;

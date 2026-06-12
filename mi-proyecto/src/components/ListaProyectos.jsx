@@ -1,88 +1,89 @@
 import { useState, useEffect, useRef } from 'react';
 import { obtenerProyectos, agregarProyecto, eliminarProyecto, buscarProyecto } from '../services/proyectoService.js';
+import { Container, Grid, Typography, TextField, Box, Divider } from '@mui/material';
 import ProyectoCard from './ProyectoCard';
-import DetalleProyecto from './DetalleProyecto';
 import RegistroActividad from './RegistroActividad';
-import '../css/ListaProyectos.css';
-import FormularioProyecto from './FormularioProyecto.jsx'
+import FormularioProyecto from './FormularioProyecto.jsx';
 
 function ListaProyectos() {
   const [proyectos, setProyectos] = useState([]);
   const [busqueda, setBusqueda] = useState('');
-  const [proyectoSeleccionado, setProyectoSeleccionado] = useState(null);
   const [ultimaActualizacion, setUltimaActualizacion] = useState(null);
 
+  const primeraVez = useRef(true);
+  const cambioDesBusqueda = useRef(false);
 
-const primeraVez = useRef(true);
-const cambioDesBusqueda = useRef(false);
+  useEffect(() => {
+    if (primeraVez.current) {
+      primeraVez.current = false;
+      return;
+    }
+    if (cambioDesBusqueda.current) {
+      cambioDesBusqueda.current = false;
+      return;
+    }
+    setUltimaActualizacion(new Date());
+  }, [proyectos]);
 
-useEffect(() => {
-  if (primeraVez.current) {
-    primeraVez.current = false;
-    return;
-  }
-  if (cambioDesBusqueda.current) {
-    cambioDesBusqueda.current = false;
-    return;
-  }
-  setUltimaActualizacion(new Date());
-}, [proyectos]);
+  useEffect(() => {
+    setProyectos(obtenerProyectos());
+  }, []);
 
+  const handleEliminar = (id) => {
+    eliminarProyecto(id);
+    setProyectos(buscarProyecto(busqueda));
+  };
 
+  const handleBuscar = (e) => {
+    const { value } = e.target;
+    setBusqueda(value);
+    cambioDesBusqueda.current = true;
+    setProyectos(buscarProyecto(value));
+  };
 
-useEffect(() => {
-  setProyectos(obtenerProyectos());
-}, []);
+  const handleAgregarAlServicio = (proyectoCompleto) => {
+    agregarProyecto(proyectoCompleto); 
+    setProyectos(obtenerProyectos()); 
+  };
 
-const handleEliminar = (id) => {
-  eliminarProyecto(id);
-  setProyectos(buscarProyecto(busqueda));
-};
+  return (
+    <Container maxWidth="lg" sx={{ py: 6 }}>
+      <Typography variant="h4" component="h1" sx={{ mb: 4, fontWeight: 900, color: '#1a2035' }}>
+        Listado de Proyectos
+      </Typography>
 
-const handleBuscar = (e) => {
-  const { value } = e.target;
-  setBusqueda(value);
-  cambioDesBusqueda.current = true;
-  setProyectos(buscarProyecto(value));
-};
-
-const handleAgregarAlServicio = (proyectoCompleto) => {
-  agregarProyecto(proyectoCompleto); 
-  setProyectos(obtenerProyectos()); 
-};
-
-
-if (proyectoSeleccionado) {
-  return <DetalleProyecto proyecto={proyectoSeleccionado} onVolver={() => setProyectoSeleccionado(null)} />;
-}
-
-return (
-  <section className="lista-proyectos-container">
-    <h1 className="titulo-proyectos">Listado de Proyectos</h1>
-    <div className="buscador-container">
-      <input
-        type="text"
-        placeholder="Buscar proyecto..."
-        value={busqueda}
-        onChange={handleBuscar}
-        className="buscador"
-      />
-    </div>
-
-    <div className="contenedor-proyectos">
-      {proyectos.map((proyecto) => (
-        <ProyectoCard
-          key={proyecto.id}
-          proyecto={proyecto}
-          onEliminar={handleEliminar}
-          onVerDetalle={setProyectoSeleccionado}
+      <Box sx={{ mb: 6 }}>
+        <TextField
+          fullWidth
+          placeholder="Buscar por título..."
+          value={busqueda}
+          onChange={handleBuscar}
+          variant="outlined"
+          sx={{ maxWidth: 600, bgcolor: '#ffffff' }}
         />
-      ))}
-      <FormularioProyecto onAgregar={handleAgregarAlServicio}/>
-    </div>
-    {ultimaActualizacion && <RegistroActividad fecha={ultimaActualizacion} />}
-  </section>
-);
+      </Box>
+
+      <Divider sx={{ mb: 6 }} />
+
+      <Grid container spacing={3} alignItems="stretch">
+        {proyectos.map((proyecto) => (
+          <Grid item xs={12} sm={6} md={4} key={proyecto.id} sx={{ display: 'flex' }}>
+            <ProyectoCard proyecto={proyecto} onEliminar={handleEliminar} />
+          </Grid>
+        ))}
+        
+        <Grid item xs={12} sm={6} md={4} sx={{ display: 'flex' }}>
+          <FormularioProyecto onAgregar={handleAgregarAlServicio} />
+        </Grid>
+      </Grid>
+
+      {ultimaActualizacion && (
+        <Box sx={{ mt: 8 }}>
+          <RegistroActividad fecha={ultimaActualizacion} />
+        </Box>
+      )}
+    </Container>
+  );
 }
 
 export default ListaProyectos;

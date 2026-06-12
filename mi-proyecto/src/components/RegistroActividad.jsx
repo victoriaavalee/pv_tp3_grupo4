@@ -1,4 +1,5 @@
-import '../css/RegistroActividad.css';
+import { Box, Typography, Divider } from '@mui/material';
+import { AccessTime as AccessTimeIcon } from '@mui/icons-material';
 
 function formatearFecha(fecha) {
     const d = new Date(fecha);
@@ -12,13 +13,39 @@ function formatearFecha(fecha) {
 
 function RegistroActividad({ fecha }) {
     if (!fecha) return null;
-    return (
-        <section className="registro-actividad">
-        <p>
-            Última actualización de la lista: {formatearFecha(fecha)}
-        </p>
-        </section>
-    );
+   return (
+  <Box 
+    component="section" 
+    sx={{ 
+      mt: 8,          
+      pb: 4, 
+      display: 'flex', 
+      flexDirection: 'column', 
+      alignItems: 'center' 
+    }}
+  >
+    <Divider sx={{ width: '100%', mb: 4 }} />
+
+    <Box 
+      sx={{ 
+        display: 'flex', 
+        alignItems: 'center', 
+        gap: 1, 
+        color: 'text.secondary',
+        bgcolor: 'action.hover',
+        px: 3,
+        py: 1.5,
+        borderRadius: 2
+      }}
+    >
+      <AccessTimeIcon fontSize="small" />
+      
+      <Typography variant="body2" sx={{ fontWeight: 500 }}>
+        Última actualización de la lista: {formatearFecha(fecha)}
+      </Typography>
+    </Box>
+  </Box>
+);
 }
 
 export default RegistroActividad;
