@@ -67,7 +67,7 @@ function ListaProyectos() {
 
       <Grid container spacing={3} alignItems="stretch">
         {proyectos.map((proyecto) => (
-          <Grid item xs={12} sm={6} md={4} key={proyecto.id} sx={{ display: 'flex' }}>
+          <Grid item xs={12} sm={6} md={4} key={proyecto.id} sx={{ display: 'flex' }} size={{ xs: 12, sm: 6, md: 4, lg:3 }}>
             <ProyectoCard proyecto={proyecto} onEliminar={handleEliminar} />
           </Grid>
         ))}
