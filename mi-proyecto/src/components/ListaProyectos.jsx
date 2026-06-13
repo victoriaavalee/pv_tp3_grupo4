@@ -48,33 +48,43 @@ function ListaProyectos() {
 
   return (
     <Container maxWidth="lg" sx={{ py: 6 }}>
-      <Typography variant="h4" component="h1" sx={{ mb: 4, fontWeight: 900, color: '#1a2035' }}>
-        Listado de Proyectos
-      </Typography>
 
-      <Box sx={{ mb: 6 }}>
-        <TextField
-          fullWidth
-          placeholder="Buscar por título..."
-          value={busqueda}
-          onChange={handleBuscar}
-          variant="outlined"
-          sx={{ maxWidth: 600, bgcolor: '#ffffff' }}
-        />
-      </Box>
+      <Container >
+        <Typography variant="h4" component="h1" sx={{ mb: 4, fontWeight: 900, color: '#1a2035' }}>
+          Listado de Proyectos
+        </Typography>
 
-      <Divider sx={{ mb: 6 }} />
+        <Box sx={{ mb: 6 }}>
+          <TextField
+            fullWidth
+            placeholder="Buscar por título..."
+            value={busqueda}
+            onChange={handleBuscar}
+            variant="outlined"
+            sx={{ maxWidth: 600, bgcolor: '#ffffff' }}
+          />
+        </Box>
 
-      <Grid container spacing={3} alignItems="stretch">
-        {proyectos.map((proyecto) => (
-          <Grid item xs={12} sm={6} md={4} key={proyecto.id} sx={{ display: 'flex' }} size={{ xs: 12, sm: 6, md: 4, lg:3 }}>
-            <ProyectoCard proyecto={proyecto} onEliminar={handleEliminar} />
-          </Grid>
-        ))}
-        
-        <Grid item xs={12} sm={6} md={4} sx={{ display: 'flex' }}>
+        <Divider sx={{ mb: 6 }} />
+      </Container>
+
+      <Grid container spacing={3} alignItems="stretch" sx={{ width: '100%', mt: 2 }}>
+
+
+        <Grid item size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
           <FormularioProyecto onAgregar={handleAgregarAlServicio} />
         </Grid>
+
+        <Grid item xs={4} size={{ xs: 'grow', sm: 'grow', md: 'grow', lg: 'grow' }} container spacing={3}>
+          {proyectos.map((proyecto) => (
+            <Grid item sx={{ display: 'flex' }}  key={proyecto.id}  size={{ xs: 12, sm: 12, md: 6, lg: 4 }}>
+              <ProyectoCard proyecto={proyecto} onEliminar={handleEliminar} />
+            </Grid>
+          ))}
+
+
+        </Grid>
+
       </Grid>
 
       {ultimaActualizacion && (
