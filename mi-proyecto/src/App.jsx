@@ -6,26 +6,29 @@ import ListaProyectos from './components/ListaProyectos';
 import DetalleProyecto from './components/DetalleProyecto';
 import Dashboard from './views/Dashboard';
 import PerfilUsuario from './views/PerfilUsuario';
+import { UsuarioProvider } from './context/UsuarioContext';
 import './css/App.css';
 
 function App() {
   return (
-    <BrowserRouter>
-      <header>
-        <Header />
-        <Nav />
-      </header>
-      <main>
-        <Routes>
-          <Route path="/" element={<Dashboard />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/proyectos" element={<ListaProyectos />} />
-          <Route path="/proyectos/:id" element={<DetalleProyecto />} />
-          <Route path="/perfil" element={<PerfilUsuario />} />
-        </Routes>
-      </main>
-      <Footer />
-    </BrowserRouter>
+    <UsuarioProvider>
+      <BrowserRouter>
+        <header>
+          <Header />
+          <Nav />
+        </header>
+        <main>
+          <Routes>
+            <Route path="/" element={<Dashboard />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/proyectos" element={<ListaProyectos />} />
+            <Route path="/proyectos/:id" element={<DetalleProyecto />} />
+            <Route path="/perfil" element={<PerfilUsuario />} />
+          </Routes>
+        </main>
+        <Footer />
+      </BrowserRouter>
+    </UsuarioProvider>
   );
 }
 

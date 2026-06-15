@@ -1,8 +1,8 @@
 import { NavLink } from 'react-router-dom';
-import { Box, Stack, Button } from '@mui/material';
+import { Box, Stack, Button, Container } from '@mui/material';
 
 function Nav() {
-  return(<Box component="nav" sx={{ py: 2, }}>
+  return(<Container component="nav" sx={{ py: 2, }}>
     <Stack 
       direction="row" 
       spacing={3} 
@@ -36,7 +36,7 @@ function Nav() {
         </Button>
       ))}
     </Stack>
-  </Box>
+  </Container>
 );
 }
 
