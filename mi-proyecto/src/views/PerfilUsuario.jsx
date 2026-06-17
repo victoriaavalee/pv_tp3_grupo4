@@ -1,20 +1,22 @@
-import '../css/PerfilUsuario.css';
+import { useContext } from 'react';
+import { UsuarioContext } from '../context/UsuarioContext';
+import { Container, Typography, Paper } from '@mui/material';
+
 
 function PerfilUsuario() {
+  const { usuario } = useContext(UsuarioContext);
   return (
-    <section className="perfil-container">
-      <h1 className="perfil-titulo">
+    <Container>
+      <Typography variant="h4" gutterBottom>
         Perfil de usuario
-      </h1>
-      <article className="perfil-card">
-        <div className="perfil-info">
-          <p><strong>Nombre:</strong> Usuario Ejemplo</p>
-          <p><strong>Rol:</strong> Alumno</p>
-          <p><strong>Institución:</strong> Facultad de Ingeniería - UNJu</p>
-          <p><strong>Carrera:</strong> Analista Programador Universitario</p>
-        </div>
-      </article>
-    </section>
+      </Typography>
+      <Paper elevation={3} sx={{ padding: 2 }}>
+          <Typography><strong>Nombre:</strong> {usuario.nombre}</Typography>
+          <Typography><strong>Rol:</strong> {usuario.rol}</Typography>
+          <Typography><strong>Institución:</strong> {usuario.institucion}</Typography>
+          <Typography><strong>Carrera:</strong> {usuario.carrera}</Typography>
+      </Paper>
+    </Container>
   )
 }
 
